@@ -1,69 +1,62 @@
-// FUNKCJONALNOŚCI
+$(() => {
+    // PHOTO SLIDER
 
-var blockOne = document.querySelector(".chairs-clair .chairs-box-text");
-var blockTwo = document.querySelector(".chairs-margarita .chairs-box-text");
-var textOne = document.querySelector(".chairs-clair h3");
-var textTwo = document.querySelector(".chairs-margarita h3");
-var boxClair = document.querySelector(".chairs-clair");
-var boxMargarita = document.querySelector(".chairs-margarita");
+    const prevBtn = $('.banner-prev');
+    const nextBtn = $('.banner-next');
+    const images = $('.slider li');
 
-boxClair.addEventListener("mouseenter", function () {
+    let index = 0;
 
-    blockOne.classList.add("hidden");
-    textOne.classList.add("hidden");
+    const handleNextClick = () => {
+
+        $(images[index]).removeClass('visible');
+
+        index >= images.length -1 ? index = 0 : index++;
+
+        $(images[index]).addClass('visible');
+    };
+
+    const handlePrevClick = () => {
+
+        $(images[index]).removeClass('visible');
+
+        index === 0 ? index = images.length -1 : index--;
+
+        $(images[index]).addClass('visible');
+
+    };
+
+    prevBtn.click(handlePrevClick);
+    nextBtn.click(handleNextClick);
+
+
+// HOVER EFFECTS ON CHAIR IMAGES
+
+    const leftImage = $('.chairs-clair');
+    const rightImage = $('.chairs-margarita');
+
+    const hideElements = (function () {
+
+        $(this).children().next().addClass('hidden');
+
+    });
+
+    const showElements = (function () {
+
+        $(this).children().next().removeClass('hidden');
+
+    });
+
+    leftImage.mouseenter(hideElements);
+    leftImage.mouseleave(showElements);
+
+    rightImage.mouseenter(hideElements);
+    rightImage.mouseleave(showElements);
 });
 
-boxClair.addEventListener("mouseout", function () {
 
-    blockOne.classList.remove("hidden");
-    textOne.classList.remove("hidden");
-});
 
-boxMargarita.addEventListener("mouseenter", function () {
 
-    blockTwo.classList.add("hidden");
-    textTwo.classList.add("hidden");
-});
-
-boxMargarita.addEventListener("mouseout", function () {
-
-    blockTwo.classList.remove("hidden");
-    textTwo.classList.remove("hidden");
-});
-
-// SLIDER
-
-var bannerPrev = document.querySelector(".banner-prev");
-var bannerNext = document.querySelector(".banner-next");
-var imageList = document.querySelectorAll(".slider li");
-
-var index = 0;
-
-bannerNext.addEventListener("click", function () {
-
-    imageList[index].classList.remove("visible");
-
-    if (index >= imageList.length-1) {
-        index = 0;
-    }
-    else {
-        index++;
-    }
-    imageList[index].classList.add("visible");
-});
-
-bannerPrev.addEventListener("click", function () {
-
-    imageList[index].classList.remove("visible");
-
-    if (index === 0) {
-        index = imageList.length -1;
-    }
-    else {
-        index--;
-    }
-    imageList[index].classList.add("visible");
-});
 
 
 
